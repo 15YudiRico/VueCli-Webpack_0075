@@ -22,8 +22,8 @@ const router = new VueRouter ({
                 //Dashboard
                 {
                     path: "/",
-                    name: "root",
-                    component: importComponent ('Dasboard'),
+                    name: "Root",
+                    component: importComponent ('Dashboard'),
                 },
                 //To Do List
                 {
