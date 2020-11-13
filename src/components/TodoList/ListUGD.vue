@@ -66,6 +66,27 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <v-row justify="center">
+            <v-dialog v-model="dialogConfirm" persistent max-width="290">
+            <v-card>
+                <v-card-title class="error headline" style="font-weight:bold; color:white;">
+                Confirm Delete Data
+                </v-card-title>
+                <v-card-text>Anda yakin ingin menghapus data?</v-card-text>
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="dialogConfirm = false">
+                    Tidak
+                </v-btn>
+                <v-btn color="green darken-1" text @click="dialogDelete(item)">
+                    Ya
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+            </v-dialog>
+        </v-row>
+        
     </v-main>
 </template>
 <script>
@@ -75,7 +96,9 @@ data() {
     return {
         search: null,
         dialog: false,
+        dialogConfirm: false,
         editID: null,
+        deleteID: null,
         headers: [
             {
                 text: "Task",
@@ -134,7 +157,8 @@ methods: {
         priority: null,
         note: null,
         };
-        this.editID = null
+        this.editID = null,
+        this.deleteID = null
     },
     editItem(item) {
         this.dialog = true;
@@ -144,7 +168,13 @@ methods: {
         this.formTodo.note = this.todos[this.editID].note
     },
     deleteItem(item) {
+        //this.todos.splice(this.todos.indexOf(item), 1)
+        this.dialogConfirm = true;
+        
+    },
+    dialogDelete(item) {
         this.todos.splice(this.todos.indexOf(item), 1)
+        this.dialogConfirm = false;
     }
 },
 };
